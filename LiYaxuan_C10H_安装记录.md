@@ -175,9 +175,9 @@ wsl -l -v
 ## Step 10：卡点与剩余步骤（别人可照着做）
 
 **我卡在**：
-1. 没有 OpenRouter API key，没法真正发起一次对话（`hermes` 交互式 CLI 需要 LLM 后端）。
+1. ~~没有 LLM API key，没法真正发起一次对话。~~ **【已解决，见 Step 11：改用 DeepSeek 完成首次真实对话】**
 2. `hermes tools` 必须在真终端里跑，管道里跑不了。
-3. 没有 Telegram/Discord bot token，Level 2 多平台接不进来。
+3. 没有 Telegram/Discord bot token，Level 2 多平台接不进来（LLM 链路已通，只差平台 token）。
 
 **别人接手时照着做就能往下走**：
 
@@ -205,3 +205,66 @@ hermes                # 开始第一次对话
 cd C:\Users\lenovo\AppData\Local\hermes\hermes-agent
 npx playwright install chromium
 ```
+
+---
+
+## Step 11：用 DeepSeek 完成首次真实对话 + 调用自定义技能（2026-10-09）
+
+拿到 DeepSeek key（OpenAI 兼容）后，我把 LLM 后端真正跑通了。真实过程：
+
+**(1) 把 key 写入本机 `.env`（不入库）：**
+
+```powershell
+notepad $env:LOCALAPPDATA\hermes\.env
+# 追加（真实 key 只存在本机）：
+DEEPSEEK_API_KEY=sk-****
+```
+
+**(2) 固定 provider / 模型 / base_url：**
+
+```powershell
+hermes config set model.provider deepseek
+hermes config set model.default deepseek-flash
+hermes config set model.base_url https://api.deepseek.com/v1
+```
+
+**(3) 中途真实遇到并修复的报错 —— HTTP 401：**
+
+首次 one-shot 返回 `HTTP 401: Missing Authentication header`。我用 Hermes 自带 Python 调 `resolve_runtime_provider()` 诊断，发现：
+
+```
+provider : deepseek
+api_key  : <set len=35  source=env:DEEPSEEK_API_KEY>
+base_url : https://openrouter.ai/api/v1     ← 问题在这
+```
+
+`config.yaml` 里残留了一条 `model.base_url: https://openrouter.ai/api/v1`，导致 DeepSeek key 被发到 OpenRouter（对它无效）→ 401。把 base_url 改回 `https://api.deepseek.com/v1` 后立即恢复。
+
+> 另外：DeepSeek 当前模型是 `deepseek-flash` / `deepseek-v4-pro`（`GET /models` 可查），旧的 `deepseek-chat` 已退役，故默认模型用 `deepseek-flash`。
+
+**(4) 首次对话真实回复（exit=0）：**
+
+```
+Hello! I'm Hermes Agent, an assistant built by Nous Research — I can run tools,
+browse the web, write and run code, and help with a wide range of tasks.
+I'm currently running on the model deepseek-flash, provided by deepseek.
+```
+
+**(5) 安装并调用自定义技能 calligraphy-feedback：**
+
+```powershell
+# 复制到 %LOCALAPPDATA%\hermes\skills\personal\calligraphy-feedback\SKILL.md
+hermes skills list
+# │ calligraphy-feedback │ personal │ local │ local │ enabled │
+
+hermes -s calligraphy-feedback -z "我今天练了永字，横画总写得斜，起笔不知道怎么下笔。"
+```
+
+模型严格按技能格式输出【笔法】【结构】【章法】【今天最该改的一件事】【下次练习建议】，并以"明天把你的永字拍给我看改进版"收尾；无照片时先声明假设。
+
+**证据清单**：
+- 截图：`LiYaxuan_C10H_首次对话证据.png`
+- 日志：`证据日志/hermes_first_chat_intro.log`、`证据日志/hermes_calligraphy_skill.log`
+- 401 排查时的无 key 报错记录：`hermes_nokey_probe.txt`（工作区）
+
+至此 C10H 的 Level 1（首次真实对话）已真实达成；Level 2（多平台接入）仍待补对应 token，步骤见《配置说明》第四节。
