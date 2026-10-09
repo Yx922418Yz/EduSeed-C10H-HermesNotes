@@ -1,0 +1,19 @@
+Looking in indexes: https://mirrors.huaweicloud.com/repository/pypi/simple/
+Obtaining file:///C:/Users/lenovo/Doubao/chats/2026-10-05/new-chat/c5-c10-work/c10h-work/hermes-src/NousResearch-hermes-agent-93257fd
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Getting requirements to build editable: started
+  Getting requirements to build editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: hermes-agent
+  Building editable for hermes-agent (pyproject.toml): started
+  Building editable for hermes-agent (pyproject.toml): finished with status 'done'
+  Created wheel for hermes-agent: filename=hermes_agent-0.0.0-0.editable-py3-none-any.whl size=13763 sha256=faf63ad0e35c0a9eeefa5fefc72849c57d76c53c8148eb790841dc5d5dc553fa
+  Stored in directory: C:\Users\lenovo\AppData\Local\Temp\pip-ephem-wheel-cache-vk9fn7g3\wheels\17\3d\a9\1622bc559a3d6787b82a77947f287a15bad1453b6d97a37f49
+Successfully built hermes-agent
+Installing collected packages: hermes-agent
+Successfully installed hermes-agent-0.0.0
+install exit=0
