@@ -31,5 +31,10 @@
 ## 四、没拿什么 / 没抄什么
 
 - 没抄它的 200+ 个 tools/*.py——我用不上，也维护不动。
-- 没抄它的 gateway（Telegram/Discord 那套）——我没 token，接进来也白接。
+- 没抄它的 gateway（Telegram/Discord 那套）——我没有平台 token；不过 LLM 链路已用 DeepSeek 真实打通，补 token 后即可接入，不再是"接进来也白接"。
 - 没改它的源码——我是使用者，不是贡献者（至少这轮不是）。
+
+## 五、LLM 后端：从"设想 OpenRouter"到"实测改用 DeepSeek"
+
+- 我最初按零预算思路把 OpenRouter 写为首选，但手上的 key 实测是 DeepSeek、调 OpenRouter 返回 401；DeepSeek 走标准 OpenAI 协议、国内直连、成本低且实测可用，于是最终用它跑通首次对话（过程与理由见《配置说明》）。
+- 这一步没有拿任何现成配置：base_url 错位导致的 401 是我真实踩到并用 Hermes 自己的解析函数定位、修复的。
