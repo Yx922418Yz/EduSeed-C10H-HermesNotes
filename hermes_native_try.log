@@ -1,0 +1,141 @@
+=== hermes --version ===
+Hermes Agent v0.21.1 (2026.9.7) · upstream fc042f1d · local 16a40853 (+1 carried commit)
+Install directory: C:\Users\lenovo\AppData\Local\hermes\hermes-agent
+Install method: git
+Python: 3.11.16
+OpenAI SDK: 2.24.0
+exit=0
+=== hermes doctor ===
+
+┌─────────────────────────────────────────────────────────┐
+│                 🩺 Hermes Doctor                        │
+└─────────────────────────────────────────────────────────┘
+
+◆ Security Advisories
+  ✓ No active security advisories
+
+◆ MCP Server Security
+  ✓ No suspicious MCP stdio commands
+
+◆ Python Environment
+  ✓ Python 3.11.16
+  ✓ SQLite 3.53.1
+    → SQLite source id: 2026-05-05 10:34:17 c88b22011a54b4f6fbd149e9f8e4…
+  ✓ Virtual environment active
+  ✓ Version files consistent (0.21.1)
+
+◆ SSL / CA Certificates
+  ✓ SSL CA certificate bundle is valid
+
+◆ Required Packages
+  ✓ OpenAI SDK
+  ✓ Rich (terminal UI)
+  ✓ python-dotenv
+  ✓ PyYAML
+  ✓ HTTPX
+  ✓ Croniter (cron expressions) (optional)
+  ⚠ python-telegram-bot (optional, not installed)
+  ⚠ discord.py (optional, not installed)
+
+◆ Configuration Files
+  ✓ ~/AppData/Local/hermes/.env file exists
+  ✓ API key or custom endpoint configured
+  ✓ ~/AppData/Local/hermes/config.yaml exists
+  ⚠ Config version outdated (v0 → v42) (new settings available)
+  ✓ No deprecated config keys or env vars
+
+◆ xAI Model Retirement (May 15, 2026)
+  ✓ No retired xAI models in config
+
+◆ Plugin import paths (removed Sep 14, 2026)
+  ✓ No enabled plugin imports paths removed on 2026-09-14
+
+◆ Auth Providers
+  ⚠ Nous Portal auth (not logged in)
+  ⚠ OpenAI Codex auth (not logged in)
+    → No Codex credentials stored. Run `hermes auth` to authenticate.
+  ⚠ MiniMax OAuth (not logged in)
+  ⚠ xAI OAuth (not logged in)
+    → No xAI OAuth credentials stored. Select xAI Grok OAuth (SuperGrok / Premium+) in `hermes model`.
+
+◆ Directory Structure
+  ✓ ~/AppData/Local/hermes directory exists
+  ✓ ~/AppData/Local/hermes/cron/ exists
+  ✓ ~/AppData/Local/hermes/sessions/ exists
+  ✓ ~/AppData/Local/hermes/logs/ exists
+  ✓ ~/AppData/Local/hermes/skills/ exists
+  ✓ ~/AppData/Local/hermes/memories/ exists
+  ✓ ~/AppData/Local/hermes/SOUL.md exists (persona configured)
+  ✓ ~/AppData/Local/hermes/memories/ directory exists
+    → MEMORY.md not created yet (will be created when the agent first writes a memory)
+    → USER.md not created yet (will be created when the agent first writes a memory)
+    → ~/AppData/Local/hermes/state.db not created yet (will be created on first session)
+
+◆ External Tools
+  ✓ git
+  ✓ ripgrep (rg) (faster file search)
+  ⚠ docker not found (optional)
+  ✓ Node.js
+  ✓ agent-browser (resolves via npx on first use)
+  ⚠ Playwright Chromium not installed (browser_* tools will be hidden from the agent)
+    → Install with: cd C:\Users\lenovo\AppData\Local\hermes\hermes-agent && npx playwright install chromium
+  ✓ Browser tools (agent-browser) deps (no known vulnerabilities)
+  ✓ web workspace deps (no known vulnerabilities)
+  ✓ ui-tui workspace deps (no known vulnerabilities)
+
+◆ API Connectivity
+  Running 40 connectivity checks in parallel…
+                                                                      
+  ⚠ OpenRouter API (not configured)
+
+◆ Tool Availability
+  ✓ browser-use
+  ✓ clarify
+  ✓ code_execution
+  ✓ computer_use
+  ✓ cronjob
+  ✓ delegation
+  ✓ desktop_ui
+  ✓ file
+  ✓ memory
+  ✓ project
+  ✓ session_search
+  ✓ skills
+  ✓ terminal
+  ✓ todo
+  ✓ kanban (runtime-gated; loaded only for dispatcher-spawned workers)
+  ✓ web search (exa)
+  ✓ web extract (exa)
+  ⚠ a2a (system dependency not met)
+  ⚠ browser (system dependency not met)
+  ⚠ browser-cdp (system dependency not met)
+  ⚠ connections (system dependency not met)
+  ⚠ discord (missing DISCORD_BOT_TOKEN)
+  ⚠ discord_admin (missing DISCORD_BOT_TOKEN)
+  ⚠ feishu_doc (system dependency not met)
+  ⚠ feishu_drive (system dependency not met)
+  ⚠ hermes-yuanbao (system dependency not met)
+  ⚠ homeassistant (system dependency not met)
+  ⚠ image_gen (system dependency not met)
+  ⚠ spotify (system dependency not met)
+  ⚠ tts (system dependency not met)
+  ⚠ video (system dependency not met)
+  ⚠ video_gen (system dependency not met)
+  ⚠ vision (system dependency not met)
+  ⚠ x_search (missing XAI_API_KEY)
+
+◆ Skills Hub
+  ⚠ Skills Hub directory not initialized (run: hermes skills list)
+  ⚠ No GITHUB_TOKEN (60 req/hr rate limit — set in ~/AppData/Local/hermes/.env for better rates)
+
+◆ Memory Provider
+  ✓ Built-in memory active (no external provider configured — this is fine)
+
+────────────────────────────────────────────────────────────
+  Found 1 issue(s) to address:
+
+  1. Run 'hermes doctor --fix' or 'hermes setup' to migrate config
+
+  Tip: run 'hermes doctor --fix' to auto-fix what's possible.
+
+exit=0
