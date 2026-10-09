@@ -1,0 +1,15 @@
+# 密钥与本地环境（严禁上传）
+.env
+*.env
+!.env.example
+*.local
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# 日志/临时
+*.tmp
