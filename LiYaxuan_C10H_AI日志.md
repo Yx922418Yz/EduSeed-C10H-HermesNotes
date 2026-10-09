@@ -30,7 +30,14 @@
 - **我问 AI**："wsl --status 说没装，我要不要 wsl --install？"
 - **AI 提醒纪律**：任务书明确说"需要管理员/重启就停"，而且原生 Windows 版 hermes 已经能跑，根本不需要 WSL。所以不装。
 
+## 轮次 7：用 DeepSeek 真正跑通首次对话（关键）
+- **背景**：我拿到一把 DeepSeek key（OpenAI 兼容），但第一次 one-shot 直接报 `HTTP 401: Missing Authentication header`。
+- **我让 AI 帮我定位**：AI 建议别只看报错文字，用 Hermes 自带 Python 直接调它的 `resolve_runtime_provider()` 打印"provider/base_url/api_key/source"。结果一眼看清——key 读对了（source=env:DEEPSEEK_API_KEY），但 **base_url 是残留的 `https://openrouter.ai/api/v1`**，DeepSeek key 被发到 OpenRouter 才 401。
+- **我修复**：`hermes config set model.base_url https://api.deepseek.com/v1`，并把模型从已退役的 deepseek-chat 换成当前的 deepseek-flash，重跑立即返回真实回复；随后安装并用 `-s calligraphy-feedback` 真实调用了我写的书法点评技能。
+- **收获**：这次是我自己理解了"key、base_url、模型 ID"三件套必须同时对上，比单纯让 AI 给答案扎实得多。
+
 ## AI 使用质量自评
 - 每一轮都是"我跑命令→贴真实输出→AI 解读→我再跑下一步"，不是一句话指令。
-- 关键判断（Python 3.13 装不上、官方预装版不能冒领、WSL 不装）都是 AI 提醒我，我再验证。
-- 没有伪造任何"对话截图"——因为根本没 key 发起对话，我如实写了卡点。
+- 关键判断（Python 3.13 装不上、官方预装版不能冒领、WSL 不装、401 是 base_url 错位）都是 AI 提醒我，我再验证。
+- 没有伪造任何"对话截图"：没 key 时如实写卡点；拿到 key 后真实跑通，才补上首次对话证据（`LiYaxuan_C10H_首次对话证据.png` + 两份 `.log`）。
+- 真实 key 只写在本机 `.env`，没有进入任何对话记录、截图或仓库。
